@@ -88,6 +88,12 @@ clock = pygame.time.Clock()
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
+text_font = pygame.font.SysFont("Arial", 50)
+
+def draw_text(text, font, text_col, x, y):
+   img = font.render(text, True, text_col)
+   screen.blit(img, (x, y))
+
 ADDENEMY = pygame.USEREVENT + 1
 pygame.time.set_timer(ADDENEMY, 250)
 ADDCLOUD = pygame.USEREVENT + 2
@@ -143,6 +149,9 @@ while running:
         screen.blit(entity.surf, entity.rect)
 
     if pygame.sprite.spritecollideany(player, enemies):
+
+        draw_text("Game Over! Thank you for playing! :)", text_font, (0, 0, 0), 220, 150)
+        
         player.kill()
 
         move_up_sound.stop()
